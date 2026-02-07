@@ -3,229 +3,618 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>FF MACRO PRO™ — Premium Sensitivity Tool | by ANAS SAKA</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>FF MACRO PRO™ | Free Fire Sensitivity Tool</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Outfit','Inter',-apple-system,sans-serif}
-html{scroll-behavior:smooth}
-body{background:#06060f;color:rgba(255,255,255,.9);overflow-x:hidden;-webkit-tap-highlight-color:transparent;min-height:100vh}
-::selection{background:rgba(212,175,55,.25);color:#fef3c7}
-::-webkit-scrollbar{width:3px}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:#06060f;color:rgba(255,255,255,0.9);min-height:100vh;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:linear-gradient(to bottom,#d4af37,#b8860b);border-radius:10px}
-input{outline:none;border:none}
-button{cursor:pointer;border:none;outline:none;background:none}
+::-webkit-scrollbar-thumb{background:rgba(212,175,55,0.15);border-radius:10px}
+input{font-family:'Outfit',sans-serif}
+button{font-family:'Outfit',sans-serif;cursor:pointer;border:none;outline:none}
 
-.glass{background:rgba(255,255,255,.02);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.04);border-radius:12px}
-.glass-gold{background:linear-gradient(135deg,rgba(212,175,55,.03),rgba(184,134,11,.02));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(212,175,55,.08);border-radius:16px}
-.text-gold{background:linear-gradient(135deg,#d4af37,#f5d782,#d4af37);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:textShine 3s ease infinite}
-.btn-gold{background:linear-gradient(135deg,#d4af37,#b8860b);color:#000;font-weight:700;border-radius:12px;border:none;cursor:pointer;transition:all .3s}
-.btn-gold:active{transform:scale(.98)}
-.hidden{display:none!important}
-.flex{display:flex}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}
-.gap-2{gap:8px}.gap-3{gap:12px}.gap-4{gap:16px}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.w-full{width:100%}.text-center{text-center}.relative{position:relative}
-.mx-auto{margin-left:auto;margin-right:auto}
-.max-w{max-width:512px;margin:0 auto}
-.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.text-gold{background:linear-gradient(135deg,#d4af37,#f5d782,#d4af37);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.glass{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);backdrop-filter:blur(10px)}
+.glass-gold{background:rgba(212,175,55,0.03);border:1px solid rgba(212,175,55,0.08);backdrop-filter:blur(10px)}
 
-/* Splash */
-#splash{position:fixed;inset:0;z-index:100;background:#06060f;display:flex;align-items:center;justify-content:center;transition:opacity .5s}
-#splash.fade-out{opacity:0;pointer-events:none}
-.splash-ring{position:relative;width:112px;height:112px;margin:0 auto 32px}
-.splash-ring .ring{position:absolute;inset:-12px;border-radius:50%;opacity:.3;background:conic-gradient(from 0deg,transparent,#d4af37,transparent);animation:rotateGlow 2s linear infinite}
-.splash-ring .bg{position:absolute;inset:0;border-radius:50%;background:#06060f}
-.splash-ring .img{position:absolute;inset:4px;border-radius:50%;overflow:hidden;border:1px solid rgba(212,175,55,.3)}
-.splash-ring .img img{width:100%;height:100%;object-fit:cover}
-.progress-bar{width:192px;margin:0 auto}
-.progress-track{height:2px;background:rgba(255,255,255,.05);border-radius:10px;overflow:hidden}
-.progress-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,#d4af37,#f5d782);transition:width .15s ease-out;width:0%}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bounceIn{0%{opacity:0;transform:scale(0.8)}50%{transform:scale(1.03)}100%{opacity:1;transform:scale(1)}}
+@keyframes rotateGlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes slideDown{from{opacity:0;transform:translate(-50%,-20px)}to{opacity:1;transform:translate(-50%,0)}}
+@keyframes barFill{from{width:0%}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
 
-/* Header */
-#header{position:sticky;top:0;z-index:40;background:rgba(6,6,15,.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.03)}
-.header-inner{max-width:512px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between}
-.header-logo{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#d4af37,#b8860b);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(212,175,55,.1)}
-.header-logo span{color:#000;font-size:14px;font-weight:900}
-.header-avatar{width:36px;height:36px;border-radius:50%;overflow:hidden;border:1px solid rgba(212,175,55,.2);cursor:pointer;transition:border-color .3s;box-shadow:0 4px 12px rgba(212,175,55,.05)}
-.header-avatar:hover{border-color:rgba(212,175,55,.5)}
+.splash-screen{position:fixed;inset:0;background:#06060f;display:flex;align-items:center;justify-content:center;z-index:100;transition:opacity 0.5s ease}
+.splash-screen.hide{opacity:0;pointer-events:none}
+
+.ambient{position:fixed;inset:0;pointer-events:none;z-index:0}
+.ambient::before{content:'';position:absolute;top:-20%;right:-10%;width:500px;height:500px;background:rgba(212,175,55,0.02);border-radius:50%;filter:blur(120px)}
+.ambient::after{content:'';position:absolute;bottom:-20%;left:-10%;width:400px;height:400px;background:rgba(212,175,55,0.015);border-radius:50%;filter:blur(100px)}
+
+.header{position:sticky;top:0;z-index:40;background:rgba(6,6,15,0.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.03)}
+.header-inner{max-width:32rem;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between}
+.logo-box{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#d4af37,#b8860b);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 15px rgba(212,175,55,0.1)}
+.logo-box span{color:#000;font-size:14px;font-weight:900}
+.header-left{display:flex;align-items:center;gap:12px}
+.header-title{font-size:14px;font-weight:800;color:rgba(255,255,255,0.9);letter-spacing:-0.02em}
+.header-sub{font-size:9px;color:rgba(255,255,255,0.2);font-weight:500;letter-spacing:0.1em}
+.header-avatar{width:36px;height:36px;border-radius:50%;overflow:hidden;border:1px solid rgba(212,175,55,0.2);cursor:pointer;transition:all 0.3s}
+.header-avatar:hover{border-color:rgba(212,175,55,0.5)}
 .header-avatar img{width:100%;height:100%;object-fit:cover}
 
-/* Content */
-#content{max-width:512px;margin:0 auto;padding:20px 20px 96px}
+.main{position:relative;z-index:10;max-width:32rem;margin:0 auto;padding:20px 20px 96px}
 
-/* Creator Card */
-.creator-card{padding:16px;cursor:pointer;margin-bottom:20px;display:flex;align-items:center;gap:14px}
-.creator-card:hover .creator-name{color:#d4af37}
+.creator-card{border-radius:16px;padding:16px;margin-bottom:20px;cursor:pointer;transition:all 0.3s;animation:fadeIn 0.4s ease}
+.creator-card:hover{border-color:rgba(212,175,55,0.15)}
+.creator-inner{display:flex;align-items:center;gap:14px}
 .creator-ring{position:relative;flex-shrink:0}
-.creator-ring .ring{position:absolute;inset:-2px;border-radius:50%;background:conic-gradient(from 0deg,#d4af37,transparent,#d4af37);animation:rotateGlow 4s linear infinite;opacity:.4}
-.creator-ring .img{position:relative;width:48px;height:48px;border-radius:50%;overflow:hidden;background:#06060f;padding:1px}
-.creator-ring .img img{width:100%;height:100%;object-fit:cover;border-radius:50%}
-.creator-name{font-size:14px;font-weight:700;color:rgba(255,255,255,.8);transition:color .3s}
-.creator-sub{font-size:11px;color:rgba(255,255,255,.3);font-weight:500}
-.creator-badge{font-size:10px;color:rgba(212,175,55,.4);font-weight:700;letter-spacing:.1em;background:rgba(212,175,55,.05);padding:4px 12px;border-radius:20px;border:1px solid rgba(212,175,55,.1);flex-shrink:0}
-.verify-badge{width:14px;height:14px;border-radius:50%;background:rgba(212,175,55,.2);display:inline-flex;align-items:center;justify-content:center;font-size:7px;color:#d4af37;margin-left:6px;vertical-align:middle}
+.creator-ring::before{content:'';position:absolute;inset:-2px;border-radius:50%;background:conic-gradient(from 0deg,#d4af37,transparent,#d4af37);animation:rotateGlow 4s linear infinite;opacity:0.4}
+.creator-img{position:relative;width:48px;height:48px;border-radius:50%;overflow:hidden;background:#06060f;padding:1px}
+.creator-img img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.creator-info{flex:1;min-width:0}
+.creator-name{display:flex;align-items:center;gap:8px}
+.creator-name span{font-size:14px;font-weight:700;color:rgba(255,255,255,0.8)}
+.creator-badge{width:14px;height:14px;border-radius:50%;background:rgba(212,175,55,0.2);display:flex;align-items:center;justify-content:center;font-size:7px;color:#d4af37}
+.creator-sub{font-size:11px;color:rgba(255,255,255,0.3);font-weight:500}
+.pro-tag{font-size:10px;color:rgba(212,175,55,0.4);font-weight:700;letter-spacing:0.1em;background:rgba(212,175,55,0.05);padding:4px 12px;border-radius:20px;border:1px solid rgba(212,175,55,0.1)}
 
-/* Nav */
-.nav{display:flex;gap:4px;margin-bottom:24px;background:rgba(255,255,255,.02);border-radius:12px;padding:4px;border:1px solid rgba(255,255,255,.03)}
-.nav button{flex:1;padding:10px 0;border-radius:8px;font-size:12px;font-weight:600;transition:all .3s;color:rgba(255,255,255,.3)}
-.nav button:hover{color:rgba(255,255,255,.5)}
-.nav button.active{background:linear-gradient(135deg,#d4af37,#b8860b);color:#000;box-shadow:0 4px 12px rgba(212,175,55,.2)}
+.nav{display:flex;gap:4px;margin-bottom:24px;background:rgba(255,255,255,0.02);border-radius:12px;padding:4px;border:1px solid rgba(255,255,255,0.03)}
+.nav button{flex:1;padding:10px;border-radius:8px;font-size:12px;font-weight:600;transition:all 0.3s;background:transparent;color:rgba(255,255,255,0.3)}
+.nav button:hover{color:rgba(255,255,255,0.5)}
+.nav button.active{background:linear-gradient(90deg,#d4af37,#b8860b);color:#000;box-shadow:0 4px 15px rgba(212,175,55,0.2)}
 
-/* Search */
-.search-wrap{position:relative;margin-bottom:20px}
-.search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.2);font-size:14px}
-.search-input{width:100%;padding:14px 40px 14px 40px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:12px;color:rgba(255,255,255,.8);font-size:14px;font-weight:500;transition:all .3s}
-.search-input::placeholder{color:rgba(255,255,255,.15)}
-.search-input:focus{border-color:rgba(212,175,55,.3);background:rgba(255,255,255,.04)}
-.search-clear{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:11px;cursor:pointer}
-.search-small .search-input{padding:10px 16px;font-size:12px}
+.search-box{position:relative;margin-bottom:20px}
+.search-box input{width:100%;padding:14px 40px 14px 40px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:12px;color:rgba(255,255,255,0.8);font-size:14px;font-weight:500;outline:none;transition:all 0.3s}
+.search-box input::placeholder{color:rgba(255,255,255,0.15)}
+.search-box input:focus{border-color:rgba(212,175,55,0.3);background:rgba(255,255,255,0.04)}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.2);font-size:14px}
+.search-clear{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.3);font-size:10px;cursor:pointer;border:none}
 
-/* Stats */
 .stats{display:flex;gap:8px;margin-bottom:20px}
-.stat-box{flex:1;text-align:center;padding:12px 0}
+.stat-card{flex:1;border-radius:12px;padding:12px;text-align:center}
 .stat-num{font-size:14px;font-weight:800}
-.stat-label{font-size:9px;color:rgba(255,255,255,.2);font-weight:500;margin-top:2px;text-transform:uppercase;letter-spacing:.1em}
+.stat-label{font-size:9px;color:rgba(255,255,255,0.2);font-weight:500;margin-top:2px;text-transform:uppercase;letter-spacing:0.1em}
 
-/* Brand Grid */
 .section-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding:0 2px}
-.section-title h2{font-size:12px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em}
-.section-title span{font-size:10px;color:rgba(255,255,255,.15);font-weight:500}
-.brand-card{position:relative;padding:16px;text-align:left;transition:all .3s;overflow:hidden}
-.brand-card:active{transform:scale(.98)}
-.brand-card:hover{border-color:rgba(212,175,55,.15)!important}
-.brand-card .logo{font-size:24px;transition:transform .3s}
-.brand-card:hover .logo{transform:scale(1.1)}
-.brand-card .count{font-size:9px;color:rgba(255,255,255,.1);font-weight:600;background:rgba(255,255,255,.03);padding:2px 8px;border-radius:20px}
-.brand-card .name{font-weight:700;color:rgba(255,255,255,.7);font-size:14px;margin-top:12px;transition:color .3s}
-.brand-card:hover .name{color:#d4af37}
-.brand-card .country{font-size:10px;color:rgba(255,255,255,.15);font-weight:500;margin-top:2px}
+.section-title h2{font-size:12px;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em}
+.section-title span{font-size:10px;color:rgba(255,255,255,0.15);font-weight:500}
 
-/* Model List */
-.back-btn{display:flex;align-items:center;gap:8px;color:rgba(212,175,55,.6);font-size:12px;font-weight:600;margin-bottom:20px;transition:color .3s;cursor:pointer;background:none;border:none}
+.brand-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.brand-card{position:relative;border-radius:12px;padding:16px;text-align:left;transition:all 0.3s;overflow:hidden;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04)}
+.brand-card:hover{border-color:rgba(212,175,55,0.15)}
+.brand-card:active{transform:scale(0.98)}
+.brand-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.brand-logo{font-size:24px;transition:transform 0.3s}
+.brand-card:hover .brand-logo{transform:scale(1.1)}
+.brand-count{font-size:9px;color:rgba(255,255,255,0.1);font-weight:600;background:rgba(255,255,255,0.03);padding:2px 8px;border-radius:20px}
+.brand-name{font-weight:700;color:rgba(255,255,255,0.7);font-size:14px;transition:color 0.3s}
+.brand-card:hover .brand-name{color:#d4af37}
+.brand-country{font-size:10px;color:rgba(255,255,255,0.15);font-weight:500;margin-top:2px}
+
+.model-list{display:flex;flex-direction:column;gap:6px}
+.model-card{width:100%;display:flex;align-items:center;gap:12px;border-radius:12px;padding:14px;text-align:left;transition:all 0.2s;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04)}
+.model-card:hover{border-color:rgba(212,175,55,0.15)}
+.model-card:active{transform:scale(0.99)}
+.model-icon{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;transition:background 0.3s}
+.model-card:hover .model-icon{background:rgba(212,175,55,0.05)}
+.model-name{flex:1;font-size:14px;font-weight:600;color:rgba(255,255,255,0.6);transition:color 0.3s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.model-card:hover .model-name{color:#d4af37}
+.model-arrow{color:rgba(255,255,255,0.1);font-size:12px;transition:color 0.3s}
+.model-card:hover .model-arrow{color:rgba(212,175,55,0.4)}
+
+.back-btn{display:flex;align-items:center;gap:8px;color:rgba(212,175,55,0.6);font-size:12px;font-weight:600;margin-bottom:20px;background:none;border:none;cursor:pointer;padding:0;transition:color 0.3s}
 .back-btn:hover{color:#d4af37}
-.brand-header{padding:20px;margin-bottom:20px;display:flex;align-items:center;gap:16px}
-.brand-header .logo{font-size:40px}
-.brand-header .name{font-size:20px;font-weight:900;color:rgba(255,255,255,.9)}
-.brand-header .info{font-size:12px;color:rgba(255,255,255,.25);font-weight:500}
-.model-item{width:100%;padding:14px;text-align:left;transition:all .2s;display:flex;align-items:center;gap:12px;margin-bottom:6px}
-.model-item:active{transform:scale(.99)}
-.model-item:hover{border-color:rgba(212,175,55,.15)!important}
-.model-icon{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.03);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;transition:background .3s}
-.model-item:hover .model-icon{background:rgba(212,175,55,.05)}
-.model-name{font-size:14px;font-weight:600;color:rgba(255,255,255,.6);transition:color .3s;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.model-item:hover .model-name{color:#d4af37}
-.model-arrow{color:rgba(255,255,255,.1);font-size:12px;transition:color .3s}
-.model-item:hover .model-arrow{color:rgba(212,175,55,.4)}
-.search-result-brand{font-size:10px;color:rgba(255,255,255,.2);font-weight:500}
 
-/* Sensitivity */
-.sensi-card{overflow:hidden}
-.sensi-header{padding:20px;border-bottom:1px solid rgba(255,255,255,.03);display:flex;align-items:center;gap:16px}
-.sensi-device-icon{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,rgba(212,175,55,.1),rgba(212,175,55,.05));display:flex;align-items:center;justify-content:center;font-size:24px;border:1px solid rgba(212,175,55,.1);flex-shrink:0}
-.sensi-device-name{font-size:18px;font-weight:800;color:rgba(255,255,255,.9);letter-spacing:-.02em}
-.sensi-device-info{font-size:11px;color:rgba(255,255,255,.25);font-weight:500;margin-top:2px}
-.sensi-badges{display:flex;gap:8px;margin-top:8px}
-.badge{font-size:9px;font-weight:700;padding:2px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em}
-.badge-gold{color:rgba(212,175,55,.8);background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.15)}
-.badge-green{color:rgba(52,211,153,.8);background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.15)}
-.sensi-list{padding:16px}
-.sensi-item{background:rgba(255,255,255,.015);border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,.03);margin-bottom:8px;transition:border-color .3s;opacity:0;animation:fadeIn .4s ease forwards}
-.sensi-item:hover{border-color:rgba(212,175,55,.1)}
-.sensi-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.sensi-label{font-size:12px;font-weight:600;color:rgba(255,255,255,.4)}
-.sensi-value{font-size:18px;font-weight:900;letter-spacing:-.02em}
-.sensi-value.gold{background:linear-gradient(135deg,#d4af37,#f5d782,#d4af37);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:textShine 3s ease infinite}
-.sensi-value.white{color:rgba(255,255,255,.6)}
-.bar-track{width:100%;height:6px;background:rgba(255,255,255,.04);border-radius:10px;overflow:hidden}
-.bar-fill{height:100%;border-radius:10px;width:0%;transition:width 1s ease-out}
-.bar-range{display:flex;justify-content:space-between;margin-top:4px}
-.bar-range span{font-size:8px;color:rgba(255,255,255,.1);font-weight:500}
-.sensi-apply{padding:16px;padding-top:8px}
-.sensi-apply .btn-gold{width:100%;padding:14px 0;font-size:14px}
-.sensi-credit{text-align:center;font-size:10px;color:rgba(255,255,255,.1);font-weight:500;margin-top:16px}
-.sensi-credit span{color:rgba(212,175,55,.4);cursor:pointer;transition:color .3s}
-.sensi-credit span:hover{color:rgba(212,175,55,.6)}
+.brand-header{border-radius:16px;padding:20px;margin-bottom:20px;display:flex;align-items:center;gap:16px}
+.brand-header-logo{font-size:40px}
+.brand-header-name{font-size:20px;font-weight:900;color:rgba(255,255,255,0.9)}
+.brand-header-info{font-size:12px;color:rgba(255,255,255,0.25);font-weight:500}
 
-/* Settings */
-.settings-section{overflow:hidden;margin-bottom:20px}
-.settings-title{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.03);display:flex;align-items:center;gap:10px}
-.settings-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
-.settings-title h3{font-size:14px;font-weight:700;color:rgba(255,255,255,.7)}
-.settings-subtitle{font-size:10px;color:rgba(255,255,255,.15);font-weight:500;margin-top:2px;margin-left:38px}
-.toggle-row{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.02);border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,.03);margin:20px}
-.toggle-label{font-weight:700;color:rgba(255,255,255,.7);font-size:14px}
-.toggle-desc{font-size:10px;color:rgba(255,255,255,.2);font-weight:500;margin-top:2px}
-.toggle{position:relative;width:56px;height:28px;border-radius:20px;background:rgba(255,255,255,.1);transition:all .3s;cursor:pointer;flex-shrink:0}
-.toggle.on{background:linear-gradient(135deg,#d4af37,#b8860b);box-shadow:0 4px 12px rgba(212,175,55,.2)}
-.toggle .dot{position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.3);transition:all .3s}
-.toggle.on .dot{left:31px}
-.headshot-msg{margin:0 20px 20px;padding:16px;background:rgba(212,175,55,.04);border:1px solid rgba(212,175,55,.1);border-radius:12px;animation:bounceIn .5s ease}
-.headshot-msg .icon{width:32px;height:32px;border-radius:8px;background:rgba(212,175,55,.1);display:flex;align-items:center;justify-content:center;color:#d4af37;font-size:14px;font-weight:900;flex-shrink:0}
-.headshot-msg .title{color:#d4af37;font-weight:700;font-size:14px}
-.headshot-msg .desc{font-size:10px;color:rgba(255,255,255,.2);font-weight:500;margin-top:4px}
-.headshot-msg .btn-gold{width:100%;padding:12px 0;font-size:12px;margin-top:12px}
-.tip-item{background:rgba(255,255,255,.015);border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,.02);margin:6px 12px;display:flex;align-items:flex-start;gap:12px;transition:border-color .3s;opacity:0;animation:fadeIn .3s ease forwards}
-.tip-item:hover{border-color:rgba(212,175,55,.1)}
-.tip-icon{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.03);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;transition:background .3s}
-.tip-item:hover .tip-icon{background:rgba(212,175,55,.05)}
-.tip-title{font-weight:600;color:rgba(255,255,255,.6);font-size:12px;transition:color .3s}
-.tip-item:hover .tip-title{color:rgba(255,255,255,.8)}
-.tip-desc{font-size:10px;color:rgba(255,255,255,.2);font-weight:500;margin-top:4px;line-height:1.5}
-.tip-num{font-size:8px;color:rgba(255,255,255,.1);font-weight:700;background:rgba(255,255,255,.03);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:auto}
+.sensi-card{border-radius:16px;overflow:hidden}
+.sensi-header{padding:20px;border-bottom:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;gap:16px}
+.sensi-device-icon{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,rgba(212,175,55,0.1),rgba(212,175,55,0.05));display:flex;align-items:center;justify-content:center;font-size:24px;border:1px solid rgba(212,175,55,0.1)}
+.sensi-device-name{font-size:18px;font-weight:800;color:rgba(255,255,255,0.9);letter-spacing:-0.02em}
+.sensi-device-info{font-size:11px;color:rgba(255,255,255,0.25);font-weight:500;margin-top:2px}
+.sensi-tags{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.sensi-tag{font-size:9px;font-weight:700;padding:2px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:0.05em}
+.sensi-tag.gold{color:rgba(212,175,55,0.8);background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.15)}
+.sensi-tag.green{color:rgba(52,211,153,0.8);background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.15)}
 
-/* About */
-.about-card{text-align:center;padding:32px 24px;overflow:hidden}
+.sensi-list{padding:16px;display:flex;flex-direction:column;gap:8px}
+.sensi-item{background:rgba(255,255,255,0.015);border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.03);transition:border-color 0.3s}
+.sensi-item:hover{border-color:rgba(212,175,55,0.1)}
+.sensi-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.sensi-label{font-size:12px;font-weight:600;color:rgba(255,255,255,0.4)}
+.sensi-value{font-size:18px;font-weight:900;letter-spacing:-0.02em}
+.sensi-value.gold{background:linear-gradient(135deg,#d4af37,#f5d782);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sensi-value.normal{color:rgba(255,255,255,0.6)}
+.sensi-bar-bg{width:100%;height:6px;background:rgba(255,255,255,0.04);border-radius:10px;overflow:hidden}
+.sensi-bar{height:100%;border-radius:10px;transition:width 1s ease-out}
+.sensi-range{display:flex;justify-content:space-between;margin-top:4px}
+.sensi-range span{font-size:8px;color:rgba(255,255,255,0.1);font-weight:500}
+
+.apply-btn{margin:16px;padding:14px;background:linear-gradient(90deg,#d4af37,#b8860b);border-radius:12px;font-weight:700;color:#000;font-size:14px;width:calc(100% - 32px);box-shadow:0 4px 15px rgba(212,175,55,0.15);transition:all 0.3s;border:none;cursor:pointer}
+.apply-btn:hover{box-shadow:0 4px 25px rgba(212,175,55,0.25)}
+.apply-btn:active{transform:scale(0.98)}
+
+.settings-section{border-radius:16px;overflow:hidden;margin-bottom:20px}
+.settings-title{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;gap:10px}
+.settings-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.settings-title h3{font-size:14px;font-weight:700;color:rgba(255,255,255,0.7)}
+.settings-subtitle{font-size:10px;color:rgba(255,255,255,0.15);font-weight:500;margin-top:2px;margin-left:38px}
+
+.toggle-row{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.02);border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,0.03);margin:20px}
+.toggle-label{font-weight:700;color:rgba(255,255,255,0.7);font-size:14px}
+.toggle-sub{font-size:10px;color:rgba(255,255,255,0.2);font-weight:500;margin-top:2px}
+.toggle-btn{position:relative;width:56px;height:28px;border-radius:20px;transition:all 0.3s;cursor:pointer;border:none;flex-shrink:0}
+.toggle-btn.off{background:rgba(255,255,255,0.1)}
+.toggle-btn.on{background:linear-gradient(90deg,#d4af37,#b8860b);box-shadow:0 4px 15px rgba(212,175,55,0.2)}
+.toggle-circle{position:absolute;top:3px;width:22px;height:22px;background:#fff;border-radius:50%;box-shadow:0 2px 4px rgba(0,0,0,0.3);transition:all 0.3s}
+.toggle-btn.off .toggle-circle{left:3px}
+.toggle-btn.on .toggle-circle{left:31px}
+
+.headshot-msg{margin:0 20px 20px;padding:16px;background:rgba(212,175,55,0.04);border:1px solid rgba(212,175,55,0.1);border-radius:12px;animation:bounceIn 0.5s ease}
+.headshot-msg-inner{display:flex;align-items:flex-start;gap:12px}
+.headshot-icon{width:32px;height:32px;border-radius:8px;background:rgba(212,175,55,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#d4af37;font-weight:900;font-size:14px}
+.headshot-text{font-size:14px;font-weight:700;color:#d4af37}
+.headshot-sub{font-size:10px;color:rgba(255,255,255,0.2);font-weight:500;margin-top:4px}
+.headshot-apply{margin-top:12px;width:100%;padding:12px;background:linear-gradient(90deg,#d4af37,#b8860b);border-radius:8px;font-weight:700;color:#000;font-size:12px;border:none;cursor:pointer;box-shadow:0 4px 15px rgba(212,175,55,0.15);transition:all 0.3s}
+.headshot-apply:active{transform:scale(0.98)}
+
+.tip-card{background:rgba(255,255,255,0.015);border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.02);transition:all 0.3s;display:flex;align-items:flex-start;gap:12px;margin:6px 12px}
+.tip-card:first-child{margin-top:12px}
+.tip-card:last-child{margin-bottom:12px}
+.tip-card:hover{border-color:rgba(212,175,55,0.1)}
+.tip-icon{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;transition:background 0.3s}
+.tip-card:hover .tip-icon{background:rgba(212,175,55,0.05)}
+.tip-title-row{display:flex;align-items:center;justify-content:space-between}
+.tip-title{font-weight:600;color:rgba(255,255,255,0.6);font-size:12px;transition:color 0.3s}
+.tip-card:hover .tip-title{color:rgba(255,255,255,0.8)}
+.tip-num{font-size:8px;color:rgba(255,255,255,0.1);font-weight:700;background:rgba(255,255,255,0.03);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tip-desc{font-size:10px;color:rgba(255,255,255,0.2);font-weight:500;margin-top:4px;line-height:1.5}
+
+.about-section{border-radius:16px;overflow:hidden;margin-bottom:20px}
+.about-inner{padding:32px;text-align:center}
 .about-photo{position:relative;width:112px;height:112px;margin:0 auto 24px;cursor:pointer}
-.about-photo .ring{position:absolute;inset:-3px;border-radius:50%;background:conic-gradient(from 0deg,#d4af37,#f5d782,#d4af37,#b8860b,#d4af37);animation:rotateGlow 4s linear infinite}
-.about-photo .bg{position:absolute;inset:0;border-radius:50%;background:#06060f}
-.about-photo .img{position:absolute;inset:3px;border-radius:50%;overflow:hidden}
-.about-photo .img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-.about-photo:hover .img img{transform:scale(1.1)}
-.about-name{font-size:24px;font-weight:900;letter-spacing:-.02em;cursor:pointer}
-.about-sub{color:rgba(255,255,255,.4);font-size:14px;font-weight:500;margin-top:6px}
-.about-sub b{color:rgba(255,255,255,.6)}
-.about-line{width:64px;height:1px;background:linear-gradient(to right,transparent,rgba(212,175,55,.2),transparent);margin:24px auto}
-.about-info{text-align:left;margin-top:0}
-.about-info-item{background:rgba(255,255,255,.015);border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,.03);display:flex;align-items:center;gap:14px;margin-bottom:8px;opacity:0;animation:fadeIn .3s ease forwards}
-.about-info-icon{width:36px;height:36px;border-radius:8px;background:rgba(212,175,55,.05);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;border:1px solid rgba(212,175,55,.1)}
-.about-info-label{font-size:9px;color:rgba(255,255,255,.15);text-transform:uppercase;letter-spacing:.15em;font-weight:700}
-.about-info-value{font-weight:600;color:rgba(255,255,255,.6);font-size:12px;margin-top:2px}
+.about-ring{position:absolute;inset:-3px;border-radius:50%;background:conic-gradient(from 0deg,#d4af37,#f5d782,#d4af37,#b8860b,#d4af37);animation:rotateGlow 4s linear infinite}
+.about-ring-bg{position:absolute;inset:0;border-radius:50%;background:#06060f}
+.about-img{position:absolute;inset:3px;border-radius:50%;overflow:hidden}
+.about-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+.about-photo:hover .about-img img{transform:scale(1.1)}
+.about-name{font-size:24px;font-weight:900;letter-spacing:-0.02em;cursor:pointer}
+.about-made{color:rgba(255,255,255,0.4);font-size:14px;font-weight:500;margin-top:6px}
+.about-made strong{color:rgba(255,255,255,0.6);font-weight:700}
+.about-divider{width:64px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.2),transparent);margin:24px auto}
+.about-info{display:flex;flex-direction:column;gap:8px;text-align:left}
+.about-info-card{background:rgba(255,255,255,0.015);border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;gap:14px}
+.about-info-icon{width:36px;height:36px;border-radius:8px;background:rgba(212,175,55,0.05);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;border:1px solid rgba(212,175,55,0.1)}
+.about-info-label{font-size:9px;color:rgba(255,255,255,0.15);text-transform:uppercase;letter-spacing:0.15em;font-weight:700}
+.about-info-value{font-weight:600;color:rgba(255,255,255,0.6);font-size:12px;margin-top:2px}
 .about-brands{margin-top:24px}
-.about-brands-title{font-size:9px;color:rgba(255,255,255,.15);font-weight:700;text-transform:uppercase;letter-spacing:.15em;margin-bottom:12px}
+.about-brands-title{font-size:9px;color:rgba(255,255,255,0.15);font-weight:700;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:12px}
 .about-brands-list{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
-.about-brand-tag{font-size:9px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);padding:4px 8px;border-radius:6px;color:rgba(255,255,255,.25);font-weight:500}
-.about-btn{margin-top:32px;padding:12px 32px}
-.about-copy{text-align:center;padding:12px 0;margin-top:20px}
-.about-copy p{font-size:10px;color:rgba(255,255,255,.1);font-weight:500}
+.about-brand-tag{font-size:9px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);padding:4px 8px;border-radius:6px;color:rgba(255,255,255,0.25);font-weight:500}
+.about-anim-btn{margin-top:32px;padding:12px 32px;background:linear-gradient(90deg,#d4af37,#b8860b);border-radius:12px;font-weight:700;color:#000;font-size:14px;border:none;cursor:pointer;box-shadow:0 4px 15px rgba(212,175,55,0.15);transition:all 0.3s}
+.about-anim-btn:active{transform:scale(0.98)}
 
-/* Credit Overlay */
-#creditOverlay{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);animation:fadeInOnly .3s ease}
-#creditOverlay .inner{text-align:center;padding:24px;max-width:360px;animation:bounceIn .5s ease}
-#creditOverlay .photo{position:relative;width:112px;height:112px;margin:0 auto 24px}
-#creditOverlay .photo .ring{position:absolute;inset:-8px;border-radius:50%;background:conic-gradient(from 0deg,#d4af37,#f5d782,#d4af37,#b8860b,#d4af37);animation:rotateGlow 3s linear infinite}
-#creditOverlay .photo .bg{position:absolute;inset:0;border-radius:50%;background:#06060f}
-#creditOverlay .photo .img{position:absolute;inset:3px;border-radius:50%;overflow:hidden}
-#creditOverlay .photo .img img{width:100%;height:100%;object-fit:cover}
-#creditOverlay .name{color:#d4af37;font-size:24px;font-weight:900;letter-spacing:-.02em}
-#creditOverlay .sub{color:rgba(255,255,255,.5);font-size:14px;font-weight:500;margin-top:8px}
-#creditOverlay .sub b{color:rgba(255,255,255,.8)}
-#creditOverlay .line{width:48px;height:1px;background:linear-gradient(to right,transparent,rgba(212,175,55,.4),transparent);margin:20px auto}
-#creditOverlay .expert{color:rgba(255,255,255,.25);font-size:12px;font-weight:300}
-#creditOverlay .close-btn{margin-top:32px;padding:10px 32px;border:1px solid rgba(212,175,55,.3);border-radius:20px;color:#d4af37;font-size:12px;font-weight:600;background:none;cursor:pointer;transition:background .3s}
-#creditOverlay .close-btn:hover{background:rgba(212,175,55,.1)}
+.credit-overlay{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.95);backdrop-filter:blur(20px);animation:fadeIn 0.3s ease}
+.credit-content{text-align:center;padding:24px;max-width:320px;animation:bounceIn 0.5s ease}
+.credit-photo{position:relative;width:112px;height:112px;margin:0 auto 24px}
+.credit-ring{position:absolute;inset:-8px;border-radius:50%;background:conic-gradient(from 0deg,#d4af37,#f5d782,#d4af37,#b8860b,#d4af37);animation:rotateGlow 3s linear infinite}
+.credit-ring-bg{position:absolute;inset:0;border-radius:50%;background:#06060f}
+.credit-img{position:absolute;inset:3px;border-radius:50%;overflow:hidden}
+.credit-img img{width:100%;height:100%;object-fit:cover}
+.credit-name{color:#d4af37;font-size:24px;font-weight:900;letter-spacing:-0.02em}
+.credit-made{color:rgba(255,255,255,0.5);font-size:14px;font-weight:500;margin-top:8px}
+.credit-made strong{color:rgba(255,255,255,0.8);font-weight:700}
+.credit-line{width:48px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.4),transparent);margin:20px auto}
+.credit-sub{color:rgba(255,255,255,0.25);font-size:12px;font-weight:300}
+.credit-close{margin-top:32px;padding:10px 32px;border:1px solid rgba(212,175,55,0.3);border-radius:20px;color:#d4af37;font-size:12px;font-weight:600;background:transparent;cursor:pointer;transition:all 0.3s}
+.credit-close:hover{background:rgba(212,175,55,0.1)}
 
-/* Toast */
-#toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:50;animation:slideDown .4s ease}
-.toast-inner{display:flex;align-items:center;gap:12px;padding:12px 24px;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
-.toast-check{width:24px;height:24px;border-radius:50%;background:rgba(52,211,153,.2);display:flex;align-items:center;justify-content:center;color:rgb(52,211,153);font-size:12px;flex-shrink:0}
-.toast-text{font-size:14px;font-weight:600;color:rgba(255,255,255,.8)}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:50;animation:slideDown 0.4s ease}
+.toast-inner{padding:12px 24px;border-radius:12px;display:flex;align-items:center;gap:12px;box-shadow:0 10px 40px rgba(0,0,0,0.5);background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.15);backdrop-filter:blur(20px)}
+.toast-check{width:24px;height:24px;border-radius:50%;background:rgba(52,211,153,0.2);display:flex;align-items:center;justify-content:center;color:rgb(52,211,153);font-size:12px}
+.toast-text{font-size:14px;font-weight:600;color:rgba(255,255,255,0.8)}
 
-/* Bottom Bar */
-#bottomBar{position:fixed;bottom:0;left:0;right:0;z-index:40}
-.bottom-bg{position:absolute;inset:0;background:rgba(6,6,15,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
-.bottom-line{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(212,175,55,.1),transparent)}
-.bottom-inner{position:relative;max-width:512px;margin:0 auto;padding:12px 20px;text-align:center}
-.bottom-inner p{font-size:10px;col
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;z-index:40}
+.bottom-bar-bg{position:absolute;inset:0;background:rgba(6,6,15,0.95);backdrop-filter:blur(20px)}
+.bottom-bar-line{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.1),transparent)}
+.bottom-bar-inner{position:relative;max-width:32rem;margin:0 auto;padding:12px 20px;text-align:center}
+.bottom-bar-text{font-size:10px;color:rgba(255,255,255,0.15);font-weight:500}
+.bottom-bar-text a{color:rgba(212,175,55,0.5);cursor:pointer;font-weight:600;text-decoration:none;transition:color 0.3s}
+.bottom-bar-text a:hover{color:rgba(212,175,55,0.7)}
+
+.empty{text-align:center;padding:64px 0}
+.empty p{color:rgba(255,255,255,0.15);font-size:14px;font-weight:500}
+.copyright{text-align:center;padding:12px 0}
+.copyright p{font-size:10px;color:rgba(255,255,255,0.1);font-weight:500}
+</style>
+</head>
+<body>
+
+<div id="splash" class="splash-screen">
+<div style="text-align:center;animation:fadeIn 0.6s ease">
+<div style="position:relative;width:112px;height:112px;margin:0 auto 32px">
+<div style="position:absolute;inset:-12px;border-radius:50%;opacity:0.3;background:conic-gradient(from 0deg,transparent,#d4af37,transparent);animation:rotateGlow 2s linear infinite"></div>
+<div style="position:absolute;inset:0;border-radius:50%;background:#06060f"></div>
+<div style="position:absolute;inset:4px;border-radius:50%;overflow:hidden;border:1px solid rgba(212,175,55,0.3)">
+<img src="https://i.ibb.co/jkwbF9NF/image.jpg" style="width:100%;height:100%;object-fit:cover">
+</div>
+</div>
+<h1 class="text-gold" style="font-size:30px;font-weight:900;letter-spacing:-0.02em;margin-bottom:4px">FF MACRO PRO</h1>
+<p style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(212,175,55,0.4);font-weight:500;margin-bottom:32px">Premium Edition</p>
+<div style="width:192px;margin:0 auto">
+<div style="height:2px;background:rgba(255,255,255,0.05);border-radius:10px;overflow:hidden">
+<div id="progress-bar" style="height:100%;border-radius:10px;background:linear-gradient(90deg,#d4af37,#f5d782);width:0%;transition:width 0.15s ease-out"></div>
+</div>
+<p id="loading-text" style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:12px;font-weight:300">Loading devices...</p>
+</div>
+</div>
+</div>
+
+<div id="app" style="display:none">
+<div class="ambient"></div>
+<div id="credit-overlay" class="credit-overlay" style="display:none">
+<div class="credit-content">
+<div class="credit-photo">
+<div class="credit-ring"></div>
+<div class="credit-ring-bg"></div>
+<div class="credit-img"><img src="https://i.ibb.co/jkwbF9NF/image.jpg" alt="Anas Saka"></div>
+</div>
+<p class="credit-name">@phising.attaker</p>
+<p class="credit-made">Made by <strong>ANAS SAKA</strong> 🇵🇸</p>
+<div class="credit-line"></div>
+<p class="credit-sub">Free Fire Sensitivity Expert</p>
+<button class="credit-close" onclick="closeCreditOverlay()">Close</button>
+</div>
+</div>
+<div id="toast" class="toast" style="display:none">
+<div class="toast-inner">
+<div class="toast-check">✓</div>
+<span class="toast-text">Settings Applied Successfully</span>
+</div>
+</div>
+<header class="header">
+<div class="header-inner">
+<div class="header-left">
+<div class="logo-box"><span>FF</span></div>
+<div>
+<div class="header-title">MACRO PRO<sup style="font-size:8px;color:rgba(212,175,55,0.6);font-weight:500;margin-left:2px">™</sup></div>
+<div class="header-sub" id="header-count"></div>
+</div>
+</div>
+<div class="header-avatar" onclick="showCreditOverlay()">
+<img src="https://i.ibb.co/jkwbF9NF/image.jpg" alt="">
+</div>
+</div>
+</header>
+<main class="main">
+<div class="creator-card glass-gold" onclick="showCreditOverlay()">
+<div class="creator-inner">
+<div class="creator-ring">
+<div class="creator-img"><img src="https://i.ibb.co/jkwbF9NF/image.jpg" alt=""></div>
+</div>
+<div class="creator-info">
+<div class="creator-name"><span>@phising.attaker</span><div class="creator-badge">✓</div></div>
+<div class="creator-sub">Made by ANAS SAKA 🇵🇸</div>
+</div>
+<div class="pro-tag">PRO</div>
+</div>
+</div>
+<div class="nav" id="nav-bar"></div>
+<div id="page-content"></div>
+</main>
+<div class="bottom-bar">
+<div class="bottom-bar-bg"></div>
+<div class="bottom-bar-line"></div>
+<div class="bottom-bar-inner">
+<p class="bottom-bar-text">Built by <a onclick="showCreditOverlay()">@phising.attaker</a> <span style="color:rgba(255,255,255,0.08);margin:0 6px">·</span> <span style="color:rgba(255,255,255,0.25);font-weight:600">ANAS SAKA</span> 🇵🇸</p>
+</div>
+</div>
+</div>
+
+<script>
+const CREATOR_IMG="https://i.ibb.co/jkwbF9NF/image.jpg";
+const allBrands=[
+{name:"Samsung",logo:"🔵",country:"🇰🇷 South Korea",models:["Galaxy S24 Ultra","Galaxy S24+","Galaxy S24","Galaxy S23 Ultra","Galaxy S23+","Galaxy S23","Galaxy S23 FE","Galaxy S22 Ultra","Galaxy S22+","Galaxy S22","Galaxy S21 Ultra","Galaxy S21+","Galaxy S21","Galaxy S21 FE","Galaxy S20 Ultra","Galaxy S20+","Galaxy S20","Galaxy S20 FE","Galaxy S10+","Galaxy S10","Galaxy S10e","Galaxy S10 Lite","Galaxy Note 20 Ultra","Galaxy Note 20","Galaxy Note 10+","Galaxy Note 10","Galaxy Note 10 Lite","Galaxy Z Fold 5","Galaxy Z Fold 4","Galaxy Z Fold 3","Galaxy Z Flip 5","Galaxy Z Flip 4","Galaxy Z Flip 3","Galaxy A75","Galaxy A73","Galaxy A72","Galaxy A71","Galaxy A70","Galaxy A55","Galaxy A54","Galaxy A53","Galaxy A52","Galaxy A52s","Galaxy A51","Galaxy A50","Galaxy A35","Galaxy A34","Galaxy A33","Galaxy A32","Galaxy A31","Galaxy A30","Galaxy A30s","Galaxy A25","Galaxy A24","Galaxy A23","Galaxy A22","Galaxy A21s","Galaxy A20","Galaxy A20s","Galaxy A15","Galaxy A14","Galaxy A13","Galaxy A12","Galaxy A11","Galaxy A10","Galaxy A10s","Galaxy A05","Galaxy A05s","Galaxy A04","Galaxy A04s","Galaxy A03","Galaxy A03s","Galaxy A02","Galaxy A02s","Galaxy A01","Galaxy M55","Galaxy M54","Galaxy M53","Galaxy M52","Galaxy M51","Galaxy M42","Galaxy M40","Galaxy M35","Galaxy M34","Galaxy M33","Galaxy M32","Galaxy M31","Galaxy M31s","Galaxy M30","Galaxy M30s","Galaxy M21","Galaxy M20","Galaxy M15","Galaxy M14","Galaxy M13","Galaxy M12","Galaxy M11","Galaxy M10","Galaxy F55","Galaxy F54","Galaxy F34","Galaxy F23","Galaxy F22","Galaxy F15","Galaxy F14","Galaxy F13","Galaxy F12"]},
+{name:"iPhone",logo:"🍎",country:"🇺🇸 USA",models:["iPhone 16 Pro Max","iPhone 16 Pro","iPhone 16 Plus","iPhone 16","iPhone 15 Pro Max","iPhone 15 Pro","iPhone 15 Plus","iPhone 15","iPhone 14 Pro Max","iPhone 14 Pro","iPhone 14 Plus","iPhone 14","iPhone 13 Pro Max","iPhone 13 Pro","iPhone 13","iPhone 13 Mini","iPhone 12 Pro Max","iPhone 12 Pro","iPhone 12","iPhone 12 Mini","iPhone 11 Pro Max","iPhone 11 Pro","iPhone 11","iPhone SE (2022)","iPhone SE (2020)","iPhone XS Max","iPhone XS","iPhone XR","iPhone X","iPhone 8 Plus","iPhone 8","iPhone 7 Plus","iPhone 7","iPhone 6s Plus","iPhone 6s"]},
+{name:"Xiaomi",logo:"🟠",country:"🇨🇳 China",models:["Xiaomi 14 Ultra","Xiaomi 14 Pro","Xiaomi 14","Xiaomi 13 Ultra","Xiaomi 13 Pro","Xiaomi 13","Xiaomi 13 Lite","Xiaomi 12 Pro","Xiaomi 12","Xiaomi 12 Lite","Xiaomi 11 Ultra","Xiaomi 11 Pro","Xiaomi 11","Xiaomi 11 Lite 5G NE","Xiaomi 11i","Xiaomi 11i HyperCharge","Xiaomi 10 Pro","Xiaomi 10","Redmi Note 13 Pro+","Redmi Note 13 Pro","Redmi Note 13","Redmi Note 12 Pro+","Redmi Note 12 Pro","Redmi Note 12","Redmi Note 11 Pro+","Redmi Note 11 Pro","Redmi Note 11","Redmi Note 11S","Redmi Note 10 Pro Max","Redmi Note 10 Pro","Redmi Note 10","Redmi Note 10S","Redmi Note 9 Pro Max","Redmi Note 9 Pro","Redmi Note 9","Redmi Note 8 Pro","Redmi Note 8","Redmi Note 7 Pro","Redmi Note 7","Redmi Note 7S","Redmi 13","Redmi 13C","Redmi 12","Redmi 12C","Redmi 12 5G","Redmi 11 Prime","Redmi 10","Redmi 10 Prime","Redmi 10A","Redmi 10C","Redmi 9","Redmi 9A","Redmi 9C","Redmi 9 Prime","Redmi 9 Power","Redmi 8","Redmi 8A","Redmi 7","Redmi 7A","Redmi 6","Redmi 6A","Redmi K70 Pro","Redmi K70","Redmi K60 Ultra","Redmi K60 Pro","Redmi K60","Redmi K50i","Redmi K40"]},
+{name:"Realme",logo:"🟡",country:"🇨🇳 China",models:["Realme GT 6","Realme GT 5 Pro","Realme GT 5","Realme GT 3","Realme GT 2 Pro","Realme GT 2","Realme GT Neo 5","Realme GT Neo 3","Realme GT Neo 2","Realme GT Master Edition","Realme 12 Pro+","Realme 12 Pro","Realme 12","Realme 12x","Realme 11 Pro+","Realme 11 Pro","Realme 11","Realme 11x","Realme 10 Pro+","Realme 10 Pro","Realme 10","Realme 9 Pro+","Realme 9 Pro","Realme 9","Realme 9i","Realme 8 Pro","Realme 8","Realme 8i","Realme 8s","Realme 7 Pro","Realme 7","Realme 7i","Realme 6 Pro","Realme 6","Realme 6i","Realme 5 Pro","Realme 5","Realme 5i","Realme 5s","Realme Narzo 70 Pro","Realme Narzo 70","Realme Narzo 60 Pro","Realme Narzo 60","Realme Narzo 50 Pro","Realme Narzo 50","Realme Narzo 50A","Realme Narzo 30 Pro","Realme Narzo 30","Realme Narzo 20 Pro","Realme Narzo 20","Realme C67","Realme C65","Realme C63","Realme C61","Realme C55","Realme C53","Realme C51","Realme C35","Realme C33","Realme C31","Realme C30","Realme C25","Realme C21","Realme C20","Realme C15","Realme C12","Realme C11"]},
+{name:"Oppo",logo:"🟢",country:"🇨🇳 China",models:["Oppo Find X7 Ultra","Oppo Find X7","Oppo Find X6 Pro","Oppo Find X6","Oppo Find X5 Pro","Oppo Find X5","Oppo Find X3 Pro","Oppo Find X3","Oppo Find X2 Pro","Oppo Find X2","Oppo Reno 12 Pro","Oppo Reno 12","Oppo Reno 11 Pro","Oppo Reno 11","Oppo Reno 11F","Oppo Reno 10 Pro+","Oppo Reno 10 Pro","Oppo Reno 10","Oppo Reno 9 Pro","Oppo Reno 9","Oppo Reno 8 Pro","Oppo Reno 8","Oppo Reno 8T","Oppo Reno 7 Pro","Oppo Reno 7","Oppo Reno 6 Pro","Oppo Reno 6","Oppo Reno 5 Pro","Oppo Reno 5","Oppo Reno 4 Pro","Oppo Reno 4","Oppo Reno 3 Pro","Oppo Reno 3","Oppo A80","Oppo A79","Oppo A78","Oppo A77","Oppo A76","Oppo A74","Oppo A73","Oppo A72","Oppo A60","Oppo A59","Oppo A58","Oppo A57","Oppo A56","Oppo A55","Oppo A54","Oppo A53","Oppo A38","Oppo A36","Oppo A35","Oppo A33","Oppo A32","Oppo A31","Oppo A18","Oppo A17","Oppo A16","Oppo A15","Oppo A12","Oppo A11k","Oppo A9","Oppo A7","Oppo A5","Oppo A3s","Oppo F25 Pro","Oppo F23","Oppo F21 Pro","Oppo F19 Pro+","Oppo F19 Pro","Oppo F19","Oppo F17 Pro","Oppo F17","Oppo F15","Oppo F11 Pro","Oppo K12","Oppo K10","Oppo K9"]},
+{name:"Vivo",logo:"💙",country:"🇨🇳 China",models:["Vivo Y02","Vivo Y02s","Vivo Y02t","Vivo Y03","Vivo Y03s","Vivo Y11","Vivo Y12","Vivo Y12s","Vivo Y15","Vivo Y15s","Vivo Y16","Vivo Y17","Vivo Y17s","Vivo Y19","Vivo Y20","Vivo Y20i","Vivo Y20s","Vivo Y21","Vivo Y21s","Vivo Y22","Vivo Y22s","Vivo Y27","Vivo Y27s","Vivo Y28","Vivo Y28e","Vivo Y30","Vivo Y31","Vivo Y33","Vivo Y33s","Vivo Y35","Vivo Y36","Vivo Y50","Vivo Y51","Vivo Y51s","Vivo Y52s","Vivo Y53","Vivo Y53s","Vivo Y55","Vivo Y55s","Vivo Y56","Vivo Y72","Vivo Y73","Vivo Y75","Vivo Y76","Vivo Y77","Vivo Y78","Vivo Y78+","Vivo Y81","Vivo Y83","Vivo Y85","Vivo Y91","Vivo Y91i","Vivo Y93","Vivo Y95","Vivo Y97","Vivo Y100","Vivo Y100i","Vivo Y200","Vivo Y200e","Vivo Y200t","Vivo V5","Vivo V5 Plus","Vivo V7","Vivo V7 Plus","Vivo V9","Vivo V11","Vivo V11 Pro","Vivo V15","Vivo V15 Pro","Vivo V17","Vivo V17 Pro","Vivo V19","Vivo V20","Vivo V20 Pro","Vivo V20 SE","Vivo V21","Vivo V21e","Vivo V23","Vivo V23 Pro","Vivo V23e","Vivo V25","Vivo V25 Pro","Vivo V25e","Vivo V27","Vivo V27 Pro","Vivo V29","Vivo V29 Pro","Vivo V29e","Vivo V30","Vivo V30 Pro","Vivo V40","Vivo V40 Pro","Vivo V40e","Vivo X50","Vivo X50 Pro","Vivo X60","Vivo X60 Pro","Vivo X60 Pro+","Vivo X70","Vivo X70 Pro","Vivo X70 Pro+","Vivo X80","Vivo X80 Pro","Vivo X90","Vivo X90 Pro","Vivo X90 Pro+","Vivo X100","Vivo X100 Pro","Vivo X100 Ultra","Vivo X200","Vivo X200 Pro","Vivo T1","Vivo T1 Pro","Vivo T1x","Vivo T2","Vivo T2 Pro","Vivo T2x","Vivo T3","Vivo T3 Pro","Vivo T3x","Vivo S1","Vivo S1 Pro","Vivo S6","Vivo S7","Vivo S9","Vivo S10","Vivo S12","Vivo S15","Vivo S16","Vivo S17","Vivo S18","Vivo S18 Pro","Vivo S19","Vivo S19 Pro","Vivo iQOO Z3","Vivo iQOO Z5","Vivo iQOO Z6","Vivo iQOO Z7","Vivo iQOO Z9","Vivo iQOO Neo 6","Vivo iQOO Neo 7","Vivo iQOO Neo 9","Vivo iQOO 11","Vivo iQOO 12","Vivo U10","Vivo U20","Vivo Z1 Pro","Vivo Z1x"]},
+{name:"OnePlus",logo:"🔴",country:"🇨🇳 China",models:["OnePlus 12","OnePlus 12R","OnePlus 11","OnePlus 11R","OnePlus 10 Pro","OnePlus 10T","OnePlus 10R","OnePlus 9 Pro","OnePlus 9","OnePlus 9R","OnePlus 9RT","OnePlus 8 Pro","OnePlus 8","OnePlus 8T","OnePlus 7 Pro","OnePlus 7","OnePlus 7T","OnePlus 7T Pro","OnePlus 6T","OnePlus 6","OnePlus Nord 4","OnePlus Nord 3","OnePlus Nord 2T","OnePlus Nord 2","OnePlus Nord CE 4","OnePlus Nord CE 4 Lite","OnePlus Nord CE 3","OnePlus Nord CE 3 Lite","OnePlus Nord CE 2","OnePlus Nord CE 2 Lite","OnePlus Nord CE","OnePlus Nord N30","OnePlus Nord N20","OnePlus Nord N100","OnePlus Nord N200","OnePlus Ace 3","OnePlus Ace 2 Pro","OnePlus Ace 2","OnePlus Ace","OnePlus Ace Pro"]},
+{name:"POCO",logo:"⚡",country:"🇨🇳 China",models:["POCO F6 Pro","POCO F6","POCO F5 Pro","POCO F5","POCO F4 GT","POCO F4","POCO F3 GT","POCO F3","POCO F2 Pro","POCO F1","POCO X6 Pro","POCO X6","POCO X5 Pro","POCO X5","POCO X4 Pro","POCO X4 GT","POCO X3 Pro","POCO X3 GT","POCO X3","POCO X2","POCO M6 Pro","POCO M6","POCO M5s","POCO M5","POCO M4 Pro","POCO M4","POCO M3 Pro","POCO M3","POCO M2 Pro","POCO M2","POCO C65","POCO C61","POCO C55","POCO C51","POCO C40","POCO C31","POCO C3"]},
+{name:"Motorola",logo:"Ⓜ️",country:"🇺🇸 USA",models:["Motorola Edge 50 Ultra","Motorola Edge 50 Pro","Motorola Edge 50","Motorola Edge 50 Fusion","Motorola Edge 40 Pro","Motorola Edge 40","Motorola Edge 40 Neo","Motorola Edge 30 Ultra","Motorola Edge 30 Pro","Motorola Edge 30","Motorola Edge 30 Fusion","Motorola Edge 30 Neo","Motorola Edge 20 Pro","Motorola Edge 20","Moto G85","Moto G84","Moto G73","Moto G72","Moto G71","Moto G64","Moto G62","Moto G60","Moto G54","Moto G53","Moto G52","Moto G51","Moto G50","Moto G42","Moto G41","Moto G40 Fusion","Moto G34","Moto G32","Moto G31","Moto G30","Moto G24","Moto G23","Moto G22","Moto G14","Moto G13","Moto G04","Moto G04s","Moto E32","Moto E22","Moto E13","Moto E40","Motorola Razr 40 Ultra","Motorola Razr 40"]},
+{name:"Nokia",logo:"📘",country:"🇫🇮 Finland",models:["Nokia G42","Nokia G22","Nokia G21","Nokia G20","Nokia G11 Plus","Nokia G11","Nokia G10","Nokia C32","Nokia C31","Nokia C22","Nokia C21 Plus","Nokia C21","Nokia C12","Nokia C110","Nokia X30","Nokia X20","Nokia X10","Nokia XR21","Nokia XR20","Nokia 8.3","Nokia 7.2","Nokia 7.1","Nokia 6.2","Nokia 5.4","Nokia 5.3","Nokia 3.4","Nokia 2.4","Nokia 1.4"]},
+{name:"Huawei",logo:"🌐",country:"🇨🇳 China",models:["Huawei Mate 60 Pro+","Huawei Mate 60 Pro","Huawei Mate 60","Huawei Mate 50 Pro","Huawei Mate 50","Huawei Mate 40 Pro","Huawei Mate 40","Huawei Mate 30 Pro","Huawei Mate 30","Huawei P60 Pro","Huawei P60","Huawei P50 Pro","Huawei P50","Huawei P40 Pro+","Huawei P40 Pro","Huawei P40","Huawei P30 Pro","Huawei P30","Huawei P30 Lite","Huawei Nova 12 Ultra","Huawei Nova 12 Pro","Huawei Nova 12","Huawei Nova 11 Pro","Huawei Nova 11","Huawei Nova 10 Pro","Huawei Nova 10","Huawei Nova 9","Huawei Nova 8","Huawei Nova 7","Huawei Y9a","Huawei Y9 Prime","Huawei Y7a","Huawei Y6p","Huawei Y5p"]},
+{name:"Honor",logo:"💎",country:"🇨🇳 China",models:["Honor Magic 6 Pro","Honor Magic 6","Honor Magic 5 Pro","Honor Magic 5","Honor Magic V2","Honor 200 Pro","Honor 200","Honor 200 Lite","Honor 90 Pro","Honor 90","Honor 90 Lite","Honor 80 Pro","Honor 80","Honor 70 Pro","Honor 70","Honor 70 Lite","Honor X9b","Honor X9a","Honor X9","Honor X8b","Honor X8a","Honor X8","Honor X7b","Honor X7a","Honor X7","Honor X6","Honor X6a","Honor X5","Honor X5 Plus","Honor Play 8T","Honor Play 7T","Honor Play 40C"]},
+{name:"Tecno",logo:"🔷",country:"🇨🇳 China",models:["Tecno Phantom X2 Pro","Tecno Phantom X2","Tecno Phantom X","Tecno Phantom V Fold","Tecno Phantom V Flip","Tecno Camon 30 Pro","Tecno Camon 30","Tecno Camon 20 Pro","Tecno Camon 20","Tecno Camon 20 Premier","Tecno Camon 19 Pro","Tecno Camon 19","Tecno Camon 18 Premier","Tecno Camon 18 Pro","Tecno Camon 18","Tecno Spark 20 Pro+","Tecno Spark 20 Pro","Tecno Spark 20","Tecno Spark 20C","Tecno Spark 10 Pro","Tecno Spark 10","Tecno Spark 10C","Tecno Spark 9 Pro","Tecno Spark 9","Tecno Spark 8","Tecno Pova 6 Pro","Tecno Pova 6","Tecno Pova 5 Pro","Tecno Pova 5","Tecno Pova 4 Pro","Tecno Pova 4","Tecno Pova 3","Tecno Pop 8","Tecno Pop 7 Pro","Tecno Pop 7","Tecno Pop 6 Pro"]},
+{name:"Infinix",logo:"♾️",country:"🇨🇳 China",models:["Infinix Zero 40","Infinix Zero 30","Infinix Zero 20","Infinix Zero Ultra","Infinix Note 40 Pro+","Infinix Note 40 Pro","Infinix Note 40","Infinix Note 30 VIP","Infinix Note 30 Pro","Infinix Note 30","Infinix Note 30i","Infinix Note 12 Pro","Infinix Note 12","Infinix Note 11 Pro","Infinix GT 20 Pro","Infinix GT 10 Pro","Infinix Hot 40 Pro","Infinix Hot 40","Infinix Hot 40i","Infinix Hot 30 Play","Infinix Hot 30","Infinix Hot 30i","Infinix Hot 20 Play","Infinix Hot 20","Infinix Hot 20S","Infinix Hot 12 Play","Infinix Hot 12","Infinix Hot 11","Infinix Smart 8 Pro","Infinix Smart 8","Infinix Smart 7","Infinix Smart 6"]},
+{name:"Itel",logo:"📲",country:"🇨🇳 China",models:["Itel S24","Itel S23+","Itel S23","Itel RS4","Itel P55+","Itel P55","Itel P40+","Itel P40","Itel A70","Itel A60s","Itel A60","Itel A50","Itel A27","Itel Vision 5","Itel Vision 3","Itel Power 55","Itel Power 50"]},
+{name:"Google Pixel",logo:"🟣",country:"🇺🇸 USA",models:["Pixel 9 Pro XL","Pixel 9 Pro","Pixel 9","Pixel 8 Pro","Pixel 8","Pixel 8a","Pixel 7 Pro","Pixel 7","Pixel 7a","Pixel 6 Pro","Pixel 6","Pixel 6a","Pixel 5a","Pixel 5","Pixel 4a 5G","Pixel 4a","Pixel 4 XL","Pixel 4","Pixel 3a XL","Pixel 3a","Pixel 3 XL","Pixel 3"]},
+{name:"Asus ROG",logo:"🎮",country:"🇹🇼 Taiwan",models:["ROG Phone 8 Pro","ROG Phone 8","ROG Phone 7 Ultimate","ROG Phone 7","ROG Phone 6 Pro","ROG Phone 6","ROG Phone 6D","ROG Phone 5s Pro","ROG Phone 5s","ROG Phone 5 Ultimate","ROG Phone 5","ROG Phone 3","Asus Zenfone 11 Ultra","Asus Zenfone 10","Asus Zenfone 9","Asus Zenfone 8","Asus Zenfone 8 Flip"]},
+{name:"Nothing",logo:"⬜",country:"🇬🇧 UK",models:["Nothing Phone (2a) Plus","Nothing Phone (2a)","Nothing Phone (2)","Nothing Phone (1)","Nothing CMF Phone 1"]},
+{name:"Sony",logo:"🎵",country:"🇯🇵 Japan",models:["Sony Xperia 1 VI","Sony Xperia 1 V","Sony Xperia 1 IV","Sony Xperia 1 III","Sony Xperia 5 V","Sony Xperia 5 IV","Sony Xperia 5 III","Sony Xperia 10 VI","Sony Xperia 10 V","Sony Xperia 10 IV","Sony Xperia 10 III"]},
+{name:"LG",logo:"🔘",country:"🇰🇷 South Korea",models:["LG Wing","LG Velvet","LG V60 ThinQ","LG V50 ThinQ","LG V40 ThinQ","LG G8X ThinQ","LG G8 ThinQ","LG G7 ThinQ","LG K62","LG K52","LG K42","LG K22","LG Stylo 7","LG Stylo 6"]},
+{name:"Lava",logo:"🌋",country:"🇮🇳 India",models:["Lava Blaze 5G","Lava Blaze Pro 5G","Lava Blaze 2 5G","Lava Blaze Curve","Lava Agni 2","Lava Agni","Lava O2","Lava O1","Lava Yuva 3 Pro","Lava Yuva 3","Lava Yuva 2","Lava Storm"]},
+{name:"Micromax",logo:"🔸",country:"🇮🇳 India",models:["Micromax IN Note 2","Micromax IN Note 1","Micromax IN 2b","Micromax IN 2c","Micromax IN 1","Micromax Canvas Infinity","Micromax Canvas 2"]},
+{name:"ZTE",logo:"🔹",country:"🇨🇳 China",models:["ZTE Nubia Z60 Ultra","ZTE Nubia Z50 Ultra","ZTE Nubia Z50 Pro","ZTE Nubia Z50","ZTE Nubia Red Magic 9 Pro","ZTE Nubia Red Magic 8 Pro","ZTE Nubia Red Magic 7","ZTE Blade V50","ZTE Blade V40","ZTE Blade A73","ZTE Blade A54","ZTE Blade A53"]},
+{name:"Lenovo",logo:"🖥️",country:"🇨🇳 China",models:["Lenovo Legion Y90","Lenovo Legion Y70","Lenovo Legion Phone Duel 2","Lenovo Legion Phone Duel","Lenovo K14 Plus","Lenovo K13","Lenovo K12","Lenovo K10","Lenovo Tab P12 Pro","Lenovo Tab P11"]},
+{name:"HTC",logo:"📱",country:"🇹🇼 Taiwan",models:["HTC U23 Pro","HTC U23","HTC Desire 22 Pro","HTC Desire 21 Pro","HTC Desire 20+","HTC Wildfire E2","HTC Wildfire E1"]},
+{name:"Meizu",logo:"🟤",country:"🇨🇳 China",models:["Meizu 21 Pro","Meizu 21","Meizu 20 Pro","Meizu 20","Meizu 18 Pro","Meizu 18","Meizu Note 9","Meizu Note 8"]}
+];
+
+const sensiLabels={general:"🎯 General",redDot:"🔴 Red Dot","2xScope":"🔭 2x Scope","4xScope":"🔍 4x Scope",sniperScope:"🎯 Sniper Scope",freeLook:"👁️ Free Look",fireButton:"🔥 Fire Button",aimPrecision:"💎 Aim Precision",dpi:"⚡ DPI"};
+const goldHues=[{f:"#d4af37",t:"#f5d782"},{f:"#c4a035",t:"#e8c960"},{f:"#b8860b",t:"#d4af37"},{f:"#daa520",t:"#f5d782"},{f:"#cd853f",t:"#daa520"},{f:"#d4af37",t:"#ffd700"},{f:"#b8860b",t:"#daa520"},{f:"#cd853f",t:"#f5d782"},{f:"#8b7355",t:"#d4af37"}];
+const tips=[
+{icon:"⚡",title:"Developer Options ON karo",desc:"Settings > About Phone > Build Number par 7 baar tap karo"},
+{icon:"🚀",title:"GPU Rendering Force karo",desc:"Developer Options > Force GPU Rendering ON karo"},
+{icon:"🎮",title:"Game Mode Enable karo",desc:"Settings > Game Mode > Free Fire select karo > Performance Mode ON"},
+{icon:"📱",title:"Background Apps Band karo",desc:"Recent apps se sab band karo, sirf Free Fire kholo"},
+{icon:"🔋",title:"Battery Optimization OFF karo",desc:"Settings > Battery > Free Fire > Don't Optimize"},
+{icon:"📶",title:"Network Boost ON karo",desc:"Settings > WiFi > Advanced > WiFi Speed Booster ON"},
+{icon:"💾",title:"RAM Clear karo",desc:"Phone Manager > Memory Cleanup > Free Fire ke alawa sab clean karo"},
+{icon:"🌡️",title:"Phone Cool Rakho",desc:"Cover hatao, fan ke paas rakho, charging mat karo khelate waqt"},
+{icon:"🔄",title:"Cache Clear karo",desc:"Settings > Apps > Free Fire > Storage > Clear Cache"},
+{icon:"📊",title:"Animation Scale 0.5x karo",desc:"Developer Options > Window/Transition/Animator Duration Scale > 0.5x"}
+];
+
+const totalModels=allBrands.reduce((a,b)=>a+b.models.length,0);
+
+function generateSensitivity(model){
+let hash=0;
+for(let i=0;i<model.length;i++) hash=model.charCodeAt(i)+((hash<<5)-hash);
+const s=(min,max)=>{hash=(hash*9301+49297)%233280;return min+Math.abs(hash%(max-min+1))};
+return{general:s(155,185),redDot:s(140,180),"2xScope":s(130,175),"4xScope":s(120,165),sniperScope:s(110,155),freeLook:s(145,190),fireButton:s(160,195),aimPrecision:s(150,190),dpi:s(400,800)};
+}
+
+// State
+let currentPage='home';
+let selectedBrand=null;
+let selectedModel=null;
+let searchQuery='';
+let brandSearch='';
+let headshotOn=false;
+
+// DOM
+const pageContent=document.getElementById('page-content');
+const navBar=document.getElementById('nav-bar');
+
+// Init
+document.getElementById('header-count').textContent=totalModels+'+ DEVICES • v5.0';
+
+// Splash
+let progress=0;
+const splashInterval=setInterval(()=>{
+progress+=Math.random()*12+4;
+if(progress>=100){progress=100;clearInterval(splashInterval);
+document.getElementById('loading-text').textContent='Ready!';
+setTimeout(()=>{document.getElementById('splash').classList.add('hide');document.getElementById('app').style.display='block';render()},600)}
+document.getElementById('progress-bar').style.width=Math.min(progress,100)+'%';
+document.getElementById('loading-text').textContent='Loading '+Math.floor(Math.min(progress,100))+'%...';
+},100);
+
+function showCreditOverlay(){document.getElementById('credit-overlay').style.display='flex'}
+function closeCreditOverlay(){document.getElementById('credit-overlay').style.display='none'}
+function showToast(){const t=document.getElementById('toast');t.style.display='block';setTimeout(()=>t.style.display='none',3000)}
+
+function navigate(page){currentPage=page;selectedModel=null;selectedBrand=null;searchQuery='';brandSearch='';render();window.scrollTo({top:0,behavior:'smooth'})}
+
+function renderNav(){
+const tabs=[{id:'home',label:'Devices'},{id:'settings',label:'Settings'},{id:'credits',label:'About'}];
+navBar.innerHTML=tabs.map(t=>{
+const active=currentPage===t.id||(t.id==='home'&&currentPage==='models')||(t.id==='home'&&currentPage==='sensi');
+return`<button class="${active?'active':''}" onclick="navigate('${t.id}')">${t.label}</button>`}).join('');
+}
+
+function render(){
+renderNav();
+if(currentPage==='home') renderBrands();
+else if(currentPage==='models') renderModels();
+else if(currentPage==='sensi') renderSensi();
+else if(currentPage==='settings') renderSettings();
+else if(currentPage==='credits') renderAbout();
+}
+
+function renderBrands(){
+const q=searchQuery.toLowerCase();
+const bq=brandSearch.toLowerCase();
+const filtered=allBrands.filter(b=>b.name.toLowerCase().includes(bq)||b.country.toLowerCase().includes(bq));
+
+// Global search
+if(q.length>=2){
+const results=[];
+allBrands.forEach(b=>{b.models.forEach(m=>{if(m.toLowerCase().includes(q))results.push({brand:b,model:m})})});
+const shown=results.slice(0,30);
+pageContent.innerHTML=`
+<div class="search-box">
+<span class="search-icon">⌕</span>
+<input type="text" placeholder="Search any phone worldwide..." value="${searchQuery}" oninput="searchQuery=this.value;render()">
+${searchQuery?'<button class="search-clear" onclick="searchQuery=\\'\\';render()">✕</button>':''}
+</div>
+<p style="font-size:11px;color:rgba(255,255,255,0.2);margin-bottom:12px;font-weight:500">${shown.length} results found</p>
+<div class="model-list" style="max-height:70vh;overflow-y:auto">
+${shown.map((r,i)=>`<button class="model-card" onclick="selectedBrand=allBrands.find(b=>b.name==='${r.brand.name.replace(/'/g,"\\'")}');selectedModel='${r.model.replace(/'/g,"\\'")}';currentPage='sensi';render();window.scrollTo({top:0,behavior:'smooth'})" style="animation:fadeIn 0.3s ease ${i*0.03}s both">
+<div class="model-icon">${r.brand.logo}</div>
+<div class="model-name">${r.model}</div>
+<span class="model-arrow">→</span>
+</button>`).join('')}
+${shown.length===0?'<div class="empty"><p>No device found</p></div>':''}
+</div>`;
+return;
+}
+
+pageContent.innerHTML=`
+<div style="animation:fadeIn 0.3s ease">
+<div class="search-box">
+<span class="search-icon">⌕</span>
+<input type="text" placeholder="Search any phone worldwide..." value="${searchQuery}" oninput="searchQuery=this.value;render()">
+${searchQuery?'<button class="search-clear" onclick="searchQuery=\\'\\';render()">✕</button>':''}
+</div>
+<div class="stats">
+<div class="stat-card glass"><p class="stat-num text-gold">${allBrands.length}</p><p class="stat-label">Brands</p></div>
+<div class="stat-card glass"><p class="stat-num text-gold">${totalModels}+</p><p class="stat-label">Models</p></div>
+<div class="stat-card glass"><p class="stat-num text-gold">200%</p><p class="stat-label">Max Sensi</p></div>
+</div>
+<div class="search-box" style="margin-bottom:16px">
+<input type="text" placeholder="Filter brands..." value="${brandSearch}" oninput="brandSearch=this.value;render()" style="padding:10px 16px;font-size:12px">
+</div>
+<div class="section-title"><h2>Select Brand</h2><span>${filtered.length} available</span></div>
+<div class="brand-grid">
+${filtered.map((b,i)=>`<button class="brand-card" onclick="selectedBrand=allBrands.find(x=>x.name==='${b.name.replace(/'/g,"\\'")}');currentPage='models';searchQuery='';render();window.scrollTo({top:0,behavior:'smooth'})" style="animation:fadeIn 0.3s ease ${i*0.03}s both">
+<div class="brand-top"><span class="brand-logo">${b.logo}</span><span class="brand-count">${b.models.length}</span></div>
+<div class="brand-name">${b.name}</div>
+<div class="brand-country">${b.country}</div>
+</button>`).join('')}
+</div>
+${filtered.length===0?'<div class="empty"><p>No brand found</p></div>':''}
+</div>`;
+}
+
+function renderModels(){
+if(!selectedBrand){currentPage='home';render();return}
+const q=searchQuery.toLowerCase();
+const filtered=selectedBrand.models.filter(m=>m.toLowerCase().includes(q));
+const bn=selectedBrand.name.replace(/'/g,"\\'");
+
+pageContent.innerHTML=`
+<div style="animation:fadeIn 0.3s ease">
+<button class="back-btn" onclick="currentPage='home';selectedBrand=null;searchQuery='';render()">← All Brands</button>
+<div class="brand-header glass-gold">
+<span class="brand-header-logo">${selectedBrand.logo}</span>
+<div><div class="brand-header-name">${selectedBrand.name}</div>
+<div class="brand-header-info">${selectedBrand.country} • ${selectedBrand.models.length} devices</div></div>
+</div>
+<div class="search-box"><input type="text" placeholder="Search ${selectedBrand.name} models..." value="${searchQuery}" oninput="searchQuery=this.value;render()" style="padding:12px 16px"></div>
+<div class="model-list">
+${filtered.map((m,i)=>`<button class="model-card" onclick="selectedModel='${m.replace(/'/g,"\\'")}';currentPage='sensi';render();window.scrollTo({top:0,behavior:'smooth'})" style="animation:fadeIn 0.3s ease ${i*0.02}s both">
+<div class="model-icon">${selectedBrand.logo}</div>
+<div class="model-name">${m}</div>
+<span class="model-arrow">→</span>
+</button>`).join('')}
+</div>
+${filtered.length===0?'<div class="empty"><p>No model found</p></div>':''}
+</div>`;
+}
+
+function renderSensi(){
+if(!selectedModel){currentPage='home';render();return}
+const sensi=generateSensitivity(selectedModel);
+const entries=Object.entries(sensi);
+const logo=selectedBrand?selectedBrand.logo:'📱';
+const bname=selectedBrand?selectedBrand.name:'Unknown';
+const bcountry=selectedBrand?selectedBrand.country:'';
+
+pageContent.innerHTML=`
+<div style="animation:fadeIn 0.3s ease">
+<button class="back-btn" onclick="selectedModel=null;currentPage='${selectedBrand?"models":"home"}';render()">← Back</button>
+<div class="sensi-card glass-gold">
+<div class="sensi-header">
+<div class="sensi-device-icon">${logo}</div>
+<div style="flex:1">
+<div class="sensi-device-name">${selectedModel}</div>
+<div class="sensi-device-info">${bname} • ${bcountry}</div>
+<div class="sensi-tags">
+<span class="sensi-tag gold">New FF Update</span>
+<span class="sensi-tag green">100–200%</span>
+</div>
+</div>
+</div>
+<div class="sensi-list">
+${entries.map(([key,value],idx)=>{
+const isDpi=key==='dpi';
+const barPct=isDpi?0:((value-100)/100)*100;
+const hue=goldHues[idx]||goldHues[0];
+return`<div class="sensi-item" style="animation:fadeIn 0.4s ease ${idx*0.06}s both">
+<div class="sensi-top">
+<span class="sensi-label">${sensiLabels[key]||key}</span>
+<span class="sensi-value ${isDpi?'normal':'gold'}">${isDpi?value:value+'%'}</span>
+</div>
+${!isDpi?`<div class="sensi-bar-bg"><div class="sensi-bar" style="width:${barPct}%;background:linear-gradient(90deg,${hue.f},${hue.t});box-shadow:0 0 8px ${hue.f}30;animation:barFill 1s ease ${idx*0.06}s both"></div></div>
+<div class="sensi-range"><span>100%</span><span>200%</span></div>`:''}
+</div>`}).join('')}
+</div>
+<button class="apply-btn" onclick="showToast()">Copy & Apply Settings</button>
+</div>
+<p style="text-align:center;font-size:10px;color:rgba(255,255,255,0.1);margin-top:16px;font-weight:500">Optimized by <a onclick="showCreditOverlay()" style="color:rgba(212,175,55,0.4);cursor:pointer;text-decoration:none">@phising.attaker</a></p>
+</div>`;
+}
+
+function renderSettings(){
+pageContent.innerHTML=`
+<div style="animation:fadeIn 0.3s ease">
+<div class="settings-section glass">
+<div class="settings-title">
+<div class="settings-icon" style="background:rgba(239,68,68,0.1)">🎯</div>
+<div><h3>Headshot Configuration</h3></div>
+</div>
+<div class="settings-subtitle">Advanced aim assist settings</div>
+<div class="toggle-row">
+<div><div class="toggle-label">Headshot Mode</div><div class="toggle-sub">Auto aim lock system</div></div>
+<button class="toggle-btn ${headshotOn?'on':'off'}" onclick="headshotOn=!headshotOn;render()"><div class="toggle-circle"></div></button>
+</div>
+${headshotOn?`<div class="headshot-msg">
+<div class="headshot-msg-inner">
+<div class="headshot-icon">!</div>
+<div style="flex:1"><div class="headshot-text">Ab Jaake Setting Apply Karo!</div>
+<div class="headshot-sub">Game kholo aur values in-game sensitivity me dalo</div></div>
+</div>
+<button class="headshot-apply" onclick="showToast()">Apply Settings Now</button>
+</div>`:''}
+</div>
+<div class="settings-section glass">
+<div class="settings-title">
+<div class="settings-icon" style="background:rgba(212,175,55,0.1)">⚡</div>
+<div><h3>Performance Optimization</h3></div>
+</div>
+<div class="settings-subtitle">Phone ko fast & smooth banao</div>
+${tips.map((tip,i)=>`<div class="tip-card" style="animation:fadeIn 0.3s ease ${i*0.04}s both">
+<div class="tip-icon">${tip.icon}</div>
+<div style="flex:1"><div class="tip-title-row"><span class="tip-title">${tip.title}</span><span class="tip-num">${i+1}</span></div>
+<div class="tip-desc">${tip.desc}</div></div>
+</div>`).join('')}
+</div>
+</div>`;
+}
+
+function renderAbout(){
+pageContent.innerHTML=`
+<div style="animation:fadeIn 0.3s ease">
+<div class="about-section glass-gold">
+<div class="about-inner">
+<div class="about-photo" onclick="showCreditOverlay()">
+<div class="about-ring"></div>
+<div class="about-ring-bg"></div>
+<div class="about-img"><img src="${CREATOR_IMG}" alt="Anas Saka"></div>
+</div>
+<div class="about-name text-gold" onclick="showCreditOverlay()" style="cursor:pointer">@phising.attaker</div>
+<div class="about-made">Made by <strong>ANAS SAKA</strong> 🇵🇸</div>
+<div class="about-divider"></div>
+<div class="about-info">
+${[
+{icon:'🎮',label:'Speciality',value:'Free Fire Macro & Sensitivity Expert'},
+{icon:'🌍',label:'Coverage',value:allBrands.length+' Brands • '+totalModels+'+ Models'},
+{icon:'📱',label:'Version',value:'v5.0 — New FF (100–200%)'},
+{icon:'🇵🇸',label:'Message',value:'Free Palestine ❤️'}
+].map((item,i)=>`<div class="about-info-card" style="animation:fadeIn 0.3s ease ${i*0.08}s both">
+<div class="about-info-icon">${item.icon}</div>
+<div><div class="about-info-label">${item.label}</div><div class="about-info-value">${item.value}</div></div>
+</div>`).join('')}
+</div>
+<div class="about-brands">
+<div class="about-brands-title">Supported Brands</div>
+<div class="about-brands-list">
+${allBrands.map(b=>`<span class="about-brand-tag">${b.logo} ${b.name}</span>`).join('')}
+</div>
+</div>
+<button class="about-anim-btn" onclick="showCreditOverlay()">View Animation</button>
+</div>
+</div>
+<div class="copyright"><p>© 2024 @phising.attaker — All Rights Reserved</p><p style="margin-top:4px">Made by ANAS SAKA 🇵🇸</p></div>
+</div>`;
+}
+</script>
+</body>
+</html>
